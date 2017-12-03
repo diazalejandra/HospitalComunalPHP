@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_SESSION['userlogin'])){
     $usuario = $_SESSION['userlogin'][0];  
 }else{
@@ -48,7 +49,7 @@ if (isset($_SESSION['userlogin'])){
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pacientes<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="./agregarUsuario.php">Agregar</a></li>
+                        <li><a href="./agregarPaciente.php">Agregar</a></li>
                         <li><a href="./agregarPerfil.php">Listar</a></li>
                         <li><a href="./agregarProducto.php">Modificar</a></li>
                     </ul>

@@ -3,7 +3,7 @@
 require_once '../config/ConexionDB.php';
 require_once '../model/PerfilModel.php';
 
-class Paciente {
+class Perfil {
 
     public static function listar() {
         try {

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../controller/Usuario.php';
 include_once '../model/UsuarioModel.php';
 
