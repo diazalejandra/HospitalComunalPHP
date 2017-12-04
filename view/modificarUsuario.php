@@ -1,6 +1,8 @@
 <?php
 include_once '../model/UsuarioModel.php';
 session_start();
+include_once '../controller/Usuario.php';
+$lista = Usuario::listar();
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +44,29 @@ session_start();
 
                 </fieldset>
             </form>
-            <div class="resultado"></div>
+            <div class="resultado">
+                <table class='table table-hover table-responsive'>
+                    <tr> 
+                        <th> Rut </th> 
+                        <th> Nombre </th>
+                        <th> Perfil </th> 
+                        <th> Opciones </th>
+                    </tr>
+                    <?php for ($i = 0; $i < count($lista); $i++) { ?>
+                        <tr> 
+                            <td> <?php echo $lista[$i]->getUsu_id(); ?></td>
+                            <td> <?php echo $lista[$i]->getUsu_nombre(); ?></td>
+                            <td> <?php echo $lista[$i]->getUsu_perfil(); ?></td>
+                            <td> <input type="button" class="btn_eliminar" value="Eliminar" attr-id="<?php $lista[$i]->getUsu_id(); ?>"/>
+                                 <input type="button" class="btn_modificar" value="Modificar" attr-id="<?php $lista[$i]->getUsu_id(); ?>"/>                          
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+            <div class="resultadoEli">
+                
+            </div>
         </section>
 
         <script>
@@ -56,13 +80,30 @@ session_start();
                     var settings = {
                         "url": "buscaUsuario.php",
                         "method": "POST",
-                        "data": {"usu_id": $("#usu_id").val()}
+                        "data": {"usu_id_mod": $("#usu_id").val()}
                     }
-                
+
                     $.ajax(settings).done(function (response) {
                         $('.resultado').html('');
                         $('.resultado').html(response)
-                       // eliminar();
+                        eliminar();
+                    });
+                }
+
+                function eliminar() {
+                    $(".btn_eliminar").on("click", function (e) {
+                        var id = $(this).attr("attr-id");
+                        var settings = {
+                            "url": "buscaUsuario.php",
+                            "method": "POST",
+                            "data": {"id_usuario": id}
+                        }
+
+                        $.ajax(settings).done(function (response) {
+                        $('.resultadoEli').html('');
+                        $('.resultadoEli').html(response)
+                            agregar();
+                        });
                     });
                 }
             });

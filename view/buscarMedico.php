@@ -65,23 +65,6 @@ session_start();
                        // eliminar();
                     });
                 }
-
-                function eliminar() {
-                    $(".btn_eliminar").on("click", function (e) {
-                        var id = $(this).attr("attr-id");
-                        var settings = {
-                            "url": "buscarUsuario.php",
-                            "method": "POST",
-                            "data": {"id_usuario": id}
-                        }
-
-                        $.ajax(settings).done(function (response) {
-                            //                        $('.resultadoEli').html('');
-                            //                        $('.resultadoEli').html(response)
-                            agregar();
-                        });
-                    });
-                }
             });
         </script>
     </body>

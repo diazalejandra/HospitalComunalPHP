@@ -1,7 +1,7 @@
 <?php
+include_once '../model/UsuarioModel.php';
 session_start();
 include_once '../controller/Usuario.php';
-include_once '../model/UsuarioModel.php';
 
 if (isset($_POST['btn_login'])) {
     $usuario = new UsuarioModel();

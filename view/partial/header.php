@@ -33,7 +33,7 @@ if (isset($_SESSION['userlogin'])){
                     <ul class="dropdown-menu">
                         <li><a href="./agregarUsuario.php">Agregar</a></li>
                         <li><a href="./buscarUsuario.php">Buscar</a></li>
-                        <li><a href="./agregarProducto.php">Modificar</a></li>
+                        <li><a href="./modificarUsuario.php">Modificar</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

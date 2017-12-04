@@ -67,6 +67,7 @@ class Usuario {
             $stmt->bindParam(1, $usu_id);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
+            $lista = [];
 
             foreach ($resultado as $value) {
                 $dto = new UsuarioModel;
