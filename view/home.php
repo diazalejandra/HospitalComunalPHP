@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../controller/Usuario.php';
 include_once '../model/UsuarioModel.php';
 
@@ -21,6 +22,7 @@ if (isset($_POST['btn_login'])) {
     <head>
         <meta charset="UTF-8">
         <title>Hospital Tetengo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <?php

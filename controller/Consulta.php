@@ -106,6 +106,34 @@ class Consulta {
         }
         return false;
     }
+    
+        public static function buscarPorRut($rut) {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT con_id, con_fecha, con.con_paciente as con_paciente, con.con_medico as con_medico, con_estado FROM consulta con "
+                    . "left join paciente pac on con.con_paciente = pac.pac_rut "
+                    . "left join medico med on con.con_medico = med.med_rut "
+                    . "WHERE con_paciente = ? or con_medico = ? "
+                    . "order by con_fecha desc");
+            $stmt->bindParam(1, $rut);
+            $stmt->bindParam(2, $rut);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+
+            foreach ($resultado as $value) {
+                $dto = new ConsultaModel();
+                $dto->setCon_id($value["con_id"]);
+                $dto->setCon_fecha($value["con_fecha"]);
+                $dto->setCon_paciente($value["con_paciente"]);
+                $dto->setCon_medico($value["con_medico"]);
+                $dto->setCon_estado($value["con_estado"]);
+                $lista[] = $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $lista;
+    }
 }
 
 

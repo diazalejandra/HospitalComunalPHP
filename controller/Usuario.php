@@ -62,7 +62,8 @@ class Usuario {
     public static function ver($usu_id) {
         try {
             $pdo = new ConexionDB();
-            $stmt = $pdo->prepare("SELECT usu_id, usu_nombre, usu_perfil, usu_password FROM usuario WHERE usu_id = ?");
+            $stmt = $pdo->prepare("SELECT usu_id, usu_nombre, per.per_descripcion as usu_perfil, usu_password FROM usuario usu"
+                    . " join perfil per on usu.usu_perfil = per.per_id WHERE usu_id = ?");
             $stmt->bindParam(1, $usu_id);
             $stmt->execute();
             $resultado = $stmt->fetchAll();

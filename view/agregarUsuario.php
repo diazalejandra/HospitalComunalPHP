@@ -1,7 +1,8 @@
 <?php
+include_once '../model/UsuarioModel.php';
+session_start();
 include_once '../controller/Usuario.php';
 include_once '../controller/Perfil.php';
-include_once '../model/UsuarioModel.php';
 $lista = Perfil::listar();
 
 if (isset($_POST['btn_registro'])) {
@@ -23,6 +24,7 @@ if (isset($_POST['btn_registro'])) {
     <head>
         <meta charset="UTF-8">
         <title>Hospital Tetengo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <?php
@@ -59,10 +61,9 @@ if (isset($_POST['btn_registro'])) {
                         <div class="col-md-4">
                         <select id="usu_perfil" name="usu_perfil" required>
                             <option value="">-- Selecionar Perfil --</option>
-                            <?php foreach ($lista as $value) { 
-                                if ($value->getPer_id() != 'PAC'){ ?>
-                                    <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
-                            <?php }} ?>
+                            <?php foreach ($lista as $value) { ?>
+                                <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
+                            <?php } ?>
                         </select>  
                         </div>
                     </div>

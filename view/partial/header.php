@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 if (isset($_SESSION['userlogin'])){
     $usuario = $_SESSION['userlogin'][0];  
 }else{
@@ -7,7 +7,6 @@ if (isset($_SESSION['userlogin'])){
 }
 ?>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://bootswatch.com/3/cerulean/bootstrap.min.css">
@@ -23,26 +22,25 @@ if (isset($_SESSION['userlogin'])){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Hospital Tetengo</a>
+            <a class="navbar-brand" href="./home.php">Hospital Tetengo</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="./home.php">Home <span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="./agregarUsuario.php">Agregar</a></li>
-                        <li><a href="./agregarPerfil.php">Listar</a></li>
+                        <li><a href="./buscarUsuario.php">Buscar</a></li>
                         <li><a href="./agregarProducto.php">Modificar</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Médicos<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="./agregarUsuario.php">Agregar</a></li>
-                        <li><a href="./agregarPerfil.php">Listar</a></li>
+                        <li><a href="./agregarMedico.php">Agregar</a></li>
+                        <li><a href="./buscarMedico.php">Buscar</a></li>
                         <li><a href="./agregarProducto.php">Modificar</a></li>
                     </ul>
                 </li>
@@ -50,15 +48,15 @@ if (isset($_SESSION['userlogin'])){
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pacientes<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="./agregarPaciente.php">Agregar</a></li>
-                        <li><a href="./agregarPerfil.php">Listar</a></li>
+                        <li><a href="./buscarPaciente.php">Buscar</a></li>
                         <li><a href="./agregarProducto.php">Modificar</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Atenciones<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="./agregarUsuario.php">Agregar</a></li>
-                        <li><a href="./agregarPerfil.php">Listar</a></li>
+                        <li><a href="./agregarAtencion.php">Agregar</a></li>
+                        <li><a href="./buscarAtencion.php">Buscar</a></li>
                         <li><a href="./agregarProducto.php">Modificar</a></li>
                     </ul>
                 </li>
@@ -72,7 +70,7 @@ if (isset($_SESSION['userlogin'])){
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido <?php echo $usuario->getUsu_nombre(); ?> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido <?php echo $usuario->getUsu_nombre() ;?>  <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Perfil</a></li>
                         <li><a href="#" id="cerrar_sesion">Cerrar Sesión</a></li>

@@ -1,8 +1,9 @@
 <?php
+include_once '../model/UsuarioModel.php';
+session_start();
 include_once '../controller/Paciente.php';
 include_once '../model/PacienteModel.php';
 include_once '../controller/Usuario.php';
-include_once '../model/UsuarioModel.php';
 
 if (isset($_POST['btn_registro'])) {
     $usuario = new UsuarioModel();
@@ -31,6 +32,7 @@ if (isset($_POST['btn_registro'])) {
     <head>
         <meta charset="UTF-8">
         <title>Hospital Tetengo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <?php
