@@ -65,7 +65,7 @@ if (isset($_SESSION['userlogin'])){
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estadísticas<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="./listaTop.php">Atenciones</a></li>
+                        <li><a href="./estadisticaAtenciones.php">Atenciones</a></li>
                         <li><a href="./listaTopOC.php">Pacientes</a></li>
                     </ul>
                 </li>

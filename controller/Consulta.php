@@ -217,6 +217,30 @@ class Consulta {
         }
         return false;
     }
+    
+        public static function porRango($fec_ini, $fec_fin) {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT count(con_id) as cantidad, avg(med.med_valor) as valorizacion from consulta con "
+                    . "join medico med on con.con_medico = med.med_rut "
+                    . "WHERE (con_fecha >= ?) and (con_fecha <= ?) ");
+            $stmt->bindParam(1, $fec_ini);
+            $stmt->bindParam(2, $fec_fin);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            $lista = [];
+            
+            foreach ($resultado as $value) {
+                $dto = new ConsultaModel();
+                $dto->setCon_cantidad($value["cantidad"]);
+                $dto->setCon_valorizacion($value["valorizacion"]);
+                $lista[] = $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $lista;
+    }
 }
 
 

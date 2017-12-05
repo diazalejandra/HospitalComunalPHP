@@ -6,6 +6,8 @@ class ConsultaModel implements JsonSerializable {
     private $con_paciente;
     private $con_medico;
     private $con_estado;
+    private $con_cantidad;
+    private $con_valorizacion;
 
     function __construct() {
         
@@ -51,6 +53,22 @@ class ConsultaModel implements JsonSerializable {
         $this->con_estado = $con_estado;
     }
 
+    function getCon_cantidad() {
+        return $this->con_cantidad;
+    }
+
+    function getCon_valorizacion() {
+        return $this->con_valorizacion;
+    }
+
+    function setCon_cantidad($con_cantidad) {
+        $this->con_cantidad = $con_cantidad;
+    }
+
+    function setCon_valorizacion($con_valorizacion) {
+        $this->con_valorizacion = $con_valorizacion;
+    }
+    
     public function jsonSerialize() {
         
     }

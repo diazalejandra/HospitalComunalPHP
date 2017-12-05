@@ -31,7 +31,7 @@ if (isset($_POST['btn_registro'])) {
        <script>
             $(function () {
                 $("#con_paciente").autocomplete({
-                    source: 'search.php'
+                    source: 'buscaPaciente.php'
                 });
             });
 
