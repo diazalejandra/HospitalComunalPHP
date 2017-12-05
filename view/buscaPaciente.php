@@ -35,8 +35,6 @@ if (isset($_POST["pac_rut"])) {
         echo "</td><td>" . $lista->getPac_nacimiento() . "</td></tr><tr><td>";
         echo "Sexo";
         echo "</td><td>" . $lista->getPac_sexo() . "</td></tr><tr><td>";
-        echo "Direccion";
-        echo "</td><td>" . $lista->getPac_direccion() . "</td></tr><tr><td>";
         echo "Telefono";
         echo "</td><td>" . $lista->getPac_telefono() . "</td></tr></table>";
     } else {
@@ -55,7 +53,6 @@ if (isset($_POST["pac_rut_mod"])) {
         echo "<th> Apellido </th> ";
         echo "<th> Fecha de Nacimiento </th> ";
         echo "<th> Sexo </th> ";
-        echo "<th> Direccion </th> ";
         echo "<th> Telefono </th> ";
         echo "<th> Opciones </th> ";
         echo "</tr>";
@@ -66,7 +63,6 @@ if (isset($_POST["pac_rut_mod"])) {
             echo "<td> " . $lista[$i]->getPac_apellido() . "</td> ";
             echo "<td> " . $lista[$i]->getPac_nacimiento() . "</td> ";
             echo "<td> " . $lista[$i]->getPac_sexo() . "</td> ";
-            echo "<td> " . $lista[$i]->getPac_direccion() . "</td> ";
             echo "<td> " . $lista[$i]->getPac_telefono() . "</td> ";
             echo "<td> <input type=\"button\" class=\"btn_eliminar\" value=\"Eliminar\" attr-id=\"" . $lista[$i]->getPac_rut() . "\" /> "
             . "<button type=\"submit\" class=\"btn_modificar\" name=\"btn_modificar\" value=\"" . $lista[$i]->getPac_rut() . "\">Modificar</button></td> ";

@@ -51,7 +51,7 @@ if (isset($_POST['btn_registro'])) {
 
                 $("input#pac_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
                     $('input#pac_rut').val('');
-                    alert("El rut " + $(this).val() + " es inválido");
+                    //alert("El rut " + $(this).val() + " es inválido");
                 });
             });
         </script>

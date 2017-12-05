@@ -33,12 +33,14 @@ class Paciente {
     public static function crear($dto) {
         try {
             $db = new ConexionDB();
+            
+            $dir = $dto->getPac_direccion();
             $pac_rut = $dto->getPac_rut();
             $pac_nombre = $dto->getPac_nombre();
             $pac_apellido = $dto->getPac_apellido();
             $pac_nacimiento = $dto->getPac_nacimiento();
             $pac_sexo = $dto->getPac_sexo();
-            $pac_direccion = $dto->getPac_direccion();
+            $pac_direccion = md5($dir);
             $pac_telefono = $dto->getPac_telefono();
 
             $stmt = $db->prepare("INSERT INTO paciente (pac_rut, pac_nombre, pac_apellido, pac_nacimiento, pac_sexo, pac_direccion, pac_telefono) VALUES(?,?,?,?,?,?,?)");
@@ -98,12 +100,13 @@ class Paciente {
     public static function editar($dto) {
         try {
             $db = new ConexionDB();
+            $dir = $dto->getPac_direccion();
             $pac_rut = $dto->getPac_rut();
             $pac_nombre = $dto->getPac_nombre();
             $pac_apellido = $dto->getPac_apellido();
             $pac_nacimiento = $dto->getPac_nacimiento();
             $pac_sexo = $dto->getPac_sexo();
-            $pac_direccion = $dto->getPac_direccion();
+            $pac_direccion = md5($dir);
             $pac_telefono = $dto->getPac_telefono();
 
             $stmt = $db->prepare("UPDATE paciente SET pac_nombre = ?, pac_apellido = ?, pac_nacimiento = ?, pac_sexo = ?, pac_direccion = ?, pac_telefono = ? "

@@ -4,15 +4,18 @@ include_once '../controller/Usuario.php';
 
 if (isset($_POST['btn_login'])) {
     $usuario = new UsuarioModel();
+    $pass = $_POST['usu_password'];
+    $pass_e = md5($pass);
+            
     $usuario->setUsu_id($_POST['usu_id']);
-    $usuario->setUsu_password($_POST['usu_password']);
+    $usuario->setUsu_password($pass_e);
 
     if (Usuario::login($usuario) != null) {
         $usuario = Usuario::ver($usuario->getUsu_id());
         $_SESSION['userlogin'] = $usuario;
     } else {
         echo "<script type=\"text/javascript\"> alert(\"Usuario o contraseña incorrecta\");</script>";
-        echo "<script>location.href='../index.php';</script>";
+      // echo "<script>location.href='../index.php';</script>";
     }
 }
 ?>

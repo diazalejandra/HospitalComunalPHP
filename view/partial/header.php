@@ -61,6 +61,7 @@ if (isset($_SESSION['userlogin'])){
                         <li><a href="./modificarEstado.php">Actualizar Estado</a></li>
                     </ul>
                 </li>
+                <?php if(!($usuario->getUsu_perfil() == 'SEC')){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estadísticas<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -68,6 +69,7 @@ if (isset($_SESSION['userlogin'])){
                         <li><a href="./listaTopOC.php">Pacientes</a></li>
                     </ul>
                 </li>
+                <?php } ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

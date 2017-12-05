@@ -30,12 +30,14 @@ class Usuario {
 
     public static function crear($dto) {
         try {
+            $pass = $dto->getUsu_password();
+
             $db = new ConexionDB();
             $usu_id = $dto->getUsu_id();
             $usu_nombre = $dto->getUsu_nombre();
             $usu_apellido = $dto->getUsu_apellido();
             $usu_perfil = $dto->getUsu_perfil();
-            $usu_password = $dto->getUsu_password();
+            $usu_password = md5($pass);
 
             $stmt = $db->prepare("INSERT INTO usuario (usu_id, usu_nombre, usu_apellido, usu_perfil, usu_password) VALUES(?,?,?,?,?)");
             $stmt->bindParam(1, $usu_id);
@@ -90,11 +92,12 @@ class Usuario {
     public static function editar($dto) {
         try {
             $db = new ConexionDB();
+            $pass = $dto->getUsu_password();
             $usu_id = $dto->getUsu_id();
             $usu_nombre = $dto->getUsu_nombre();
             $usu_apellido = $dto->getUsu_apellido();
             $usu_perfil = $dto->getUsu_perfil();
-            $usu_password = $dto->getUsu_password();
+            $usu_password = md5($pass);
 
             $stmt = $db->prepare("UPDATE usuario SET usu_nombre = ?, usu_apellido =?, usu_perfil = ?, usu_password = ? WHERE usu_id = ?");
             $stmt->bindParam(1, $usu_nombre);
@@ -108,7 +111,7 @@ class Usuario {
         }
         return false;
     }
-    
+
     public static function actualizar($dto) {
         try {
             $db = new ConexionDB();
@@ -131,7 +134,7 @@ class Usuario {
         try {
             $db = new ConexionDB();
             $usu_id = $dto->getUsu_id();
-            $usu_password = $dto->getUsu_password();            
+            $usu_password = $dto->getUsu_password();
 
             $stmt = $db->prepare("SELECT usu_id, usu_nombre, usu_apellido, usu_perfil, usu_password FROM usuario WHERE usu_id = ? AND usu_password = ?");
             $stmt->bindParam(1, $usu_id);

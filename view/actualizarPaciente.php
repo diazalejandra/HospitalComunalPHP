@@ -141,7 +141,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="pac_direccion">Dirección</label>  
                         <div class="col-md-4">
-                            <input id="pac_direccion" name="pac_direccion" type="text" value="<?php echo $lista->getPac_direccion(); ?>" class="form-control input-md" required="">
+                            <input id="pac_direccion" name="pac_direccion" type="text" value="" class="form-control input-md" required="">
                             <span class="help-block"> </span>  
                         </div>
                     </div>
