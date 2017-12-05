@@ -18,8 +18,8 @@ if (isset($_POST['btn_registro'])) {
     $paciente->setPac_apellido($_POST['pac_apellido']);
     $paciente->setPac_direccion($_POST['pac_direccion']);
     $paciente->setPac_sexo($_POST['pac_sexo']);
-    $paciente->setPac_telefono($_POST['pac_telefono']); 
-    
+    $paciente->setPac_telefono($_POST['pac_telefono']);
+
     if (Usuario::crear($usuario) && Paciente::crear($paciente)) {
         echo "<script type=\"text/javascript\"> alert(\"Usuario creado\");</script>";
         echo "<script>location.href='../index.php';</script>";
@@ -38,6 +38,23 @@ if (isset($_POST['btn_registro'])) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link href="https://bootswatch.com/3/cerulean/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="css/login.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.rut.js"></script>
+        <script language="javascript">
+            $(document).ready(function () {
+                $("input#pac_rut").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#pac_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#pac_rut').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
+                });
+            });
+        </script>
     </head>
     <body>
         <div class="custom_body">
@@ -46,7 +63,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="login_box">
                         <section class="main-box">
                             <form name="frm_registro" action="" method="POST">
-                                
+
                                 <div class="input-box" id="titulo">
                                     <b>REGISTRO DE PACIENTE</b>
                                 </div>

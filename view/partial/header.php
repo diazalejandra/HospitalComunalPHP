@@ -58,6 +58,7 @@ if (isset($_SESSION['userlogin'])){
                         <li><a href="./agregarAtencion.php">Agregar</a></li>
                         <li><a href="./buscarAtencion.php">Buscar</a></li>
                         <li><a href="./modificarAtencion.php">Modificar</a></li>
+                        <li><a href="./modificarEstado.php">Actualizar Estado</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -73,7 +74,7 @@ if (isset($_SESSION['userlogin'])){
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido <?php echo $usuario->getUsu_nombre() ;?>  <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Perfil</a></li>
-                        <li><a href="../index.php" id="cerrar_sesion">Cerrar Sesión</a></li>
+                        <li><a href="logout.php" id="cerrar_sesion">Cerrar Sesión</a></li>
                     </ul>
                 </li>
             </ul>

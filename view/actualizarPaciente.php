@@ -39,6 +39,22 @@ if (isset($_POST['btn_registro'])) {
         <meta charset="UTF-8">
         <title>Hospital Tetengo</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/jquery.rut.js"></script>
+        <script language="javascript">
+            $(document).ready(function () {
+                $("input#pac_rut").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#pac_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#pac_rut').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
+                });
+            });
+        </script>
     </head>
     <body>
         <?php

@@ -9,10 +9,25 @@ include_once '/partial/session.php';
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="js/jquery.rut.js"></script>
         <script>
             $(function () {
                 $("#usu_id").autocomplete({
                     source: 'buscaUsuario.php'
+                });
+            });
+            
+            $(document).ready(function () {
+                $("input#usu_id").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#usu_id").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#usu_id').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
                 });
             });
         </script>

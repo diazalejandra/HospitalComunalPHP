@@ -25,6 +25,23 @@ if (isset($_POST['btn_registro'])) {
         <meta charset="UTF-8">
         <title>Hospital Tetengo</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.rut.js"></script>
+        <script language="javascript">
+            $(document).ready(function () {
+                $("input#usu_id").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#usu_id").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#usu_id').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
+                });
+            });
+        </script>
     </head>
     <body>
         <?php
@@ -68,12 +85,12 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_perfil">Perfil</label>
                         <div class="col-md-4">
-                        <select id="usu_perfil" name="usu_perfil" required>
-                            <option value="">-- Selecionar Perfil --</option>
-                            <?php foreach ($lista as $value) { ?>
-                                <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
-                            <?php } ?>
-                        </select>  
+                            <select id="usu_perfil" name="usu_perfil" required>
+                                <option value="">-- Selecionar Perfil --</option>
+                                <?php foreach ($lista as $value) { ?>
+                                    <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
+                                <?php } ?>
+                            </select>  
                         </div>
                     </div>
 

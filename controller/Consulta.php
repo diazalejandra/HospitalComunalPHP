@@ -137,6 +137,86 @@ class Consulta {
         }
         return $lista;
     }
+    
+        public static function buscarPorEstado($estado) {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT con_id, con_fecha, con.con_paciente as con_paciente, con.con_medico as con_medico, con_estado FROM consulta con "
+                    . "left join paciente pac on con.con_paciente = pac.pac_rut "
+                    . "left join medico med on con.con_medico = med.med_rut "
+                    . "WHERE con_estado = ? "
+                    . "order by con_fecha desc");
+            $stmt->bindParam(1, $estado);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            $lista = [];
+
+            foreach ($resultado as $value) {
+                $dto = new ConsultaModel();
+                $dto->setCon_id($value["con_id"]);
+                $dto->setCon_fecha($value["con_fecha"]);
+                $dto->setCon_paciente($value["con_paciente"]);
+                $dto->setCon_medico($value["con_medico"]);
+                $dto->setCon_estado($value["con_estado"]);
+                $lista[] = $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $lista;
+    }
+        public static function buscarPendientes() {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT con_id, con_fecha, con.con_paciente as con_paciente, con.con_medico as con_medico, con_estado FROM consulta con "
+                    . "left join paciente pac on con.con_paciente = pac.pac_rut "
+                    . "left join medico med on con.con_medico = med.med_rut "
+                    . "WHERE con_estado = 'AGE' and (con_fecha + INTERVAL -2 DAY = CURRENT_DATE)"
+                    . "order by con_fecha desc");
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            $lista = [];
+
+            foreach ($resultado as $value) {
+                $dto = new ConsultaModel();
+                $dto->setCon_id($value["con_id"]);
+                $dto->setCon_fecha($value["con_fecha"]);
+                $dto->setCon_paciente($value["con_paciente"]);
+                $dto->setCon_medico($value["con_medico"]);
+                $dto->setCon_estado($value["con_estado"]);
+                $lista[] = $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $lista;
+    }
+    
+        public static function actualizarAnulada() {
+        try {
+            $lista = [];
+            $db = new ConexionDB();
+            $stmt = $db->prepare("UPDATE consulta set con_estado = 'ANU' WHERE (con_fecha + INTERVAL -1 DAY = CURRENT_DATE) and "
+                    . "con_estado = 'AGE'");
+            return $stmt->execute();
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return false;
+    }
+    
+        public static function actualizarPerdida() {
+        try {
+            $lista = [];
+            $db = new ConexionDB();
+            $stmt = $db->prepare("UPDATE consulta set con_estado = 'PER' WHERE con_fecha + INTERVAL +1 DAY = CURRENT_DATE and "
+                    . "con_estado = 'CON'");
+            return $stmt->execute();
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return false;
+    }
 }
 
 

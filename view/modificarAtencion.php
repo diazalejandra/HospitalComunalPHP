@@ -9,6 +9,7 @@ include_once '/partial/session.php';
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="js/jquery.rut.js"></script>
         <script>
             $(function () {
                 $("#pac_rut").autocomplete({
@@ -19,6 +20,32 @@ include_once '/partial/session.php';
             $(function () {
                 $("#med_rut").autocomplete({
                     source: 'buscaMedico.php'
+                });
+            });
+
+            $(document).ready(function () {
+                $("input#pac_rut").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#pac_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#pac_rut').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
+                });
+
+                $("input#med_rut").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#med_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#med_rut').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
                 });
             });
         </script>
@@ -60,65 +87,65 @@ include_once '/partial/session.php';
             </form>
             <div class="resultado"></div>
         </section>
-            <div class="resultadoEli"></div>
-        </section>
+        <div class="resultadoEli"></div>
+    </section>
 
-        <script>
-            $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
-                $("#btn_buscarPac").on("click", function (event) {
-                    agregarP();
-                });
-                
-                $("#btn_buscarMed").on("click", function (event) {
-                    agregarM();
-                });
-
-                function agregarM() {
-                    var settings = {
-                        "url": "buscaAtencion.php",
-                        "method": "POST",
-                        "data": {"med_rut_mod": $("#med_rut").val()}
-                    }
-
-                    $.ajax(settings).done(function (response) {
-                        $('.resultado').html('');
-                        $('.resultado').html(response)
-                        eliminar();
-                    });
-                }
-                function agregarP() {
-                    var settings = {
-                        "url": "buscaAtencion.php",
-                        "method": "POST",
-                        "data": {"pac_rut_mod": $("#pac_rut").val()}
-                    }
-
-                    $.ajax(settings).done(function (response) {
-                        $('.resultado').html('');
-                        $('.resultado').html(response)
-                        eliminar();
-                    });
-                }
-                
-                function eliminar() {
-                    $(".btn_eliminar").on("click", function (e) {
-                        var id = $(this).attr("attr-id");
-                        var settings = {
-                            "url": "buscaAtencion.php",
-                            "method": "POST",
-                            "data": {"id_eliminar": id}
-                        }
-
-                        $.ajax(settings).done(function (response) {
-                            $('.resultadoEli').html('');
-                            $('.resultadoEli').html(response)
-                            agregarM();
-
-                        });
-                    });
-                }
+            $("#btn_buscarPac").on("click", function (event) {
+                agregarP();
             });
-        </script>
-    </body>
+
+            $("#btn_buscarMed").on("click", function (event) {
+                agregarM();
+            });
+
+            function agregarM() {
+                var settings = {
+                    "url": "buscaAtencion.php",
+                    "method": "POST",
+                    "data": {"med_rut_mod": $("#med_rut").val()}
+                }
+
+                $.ajax(settings).done(function (response) {
+                    $('.resultado').html('');
+                    $('.resultado').html(response)
+                    eliminar();
+                });
+            }
+            function agregarP() {
+                var settings = {
+                    "url": "buscaAtencion.php",
+                    "method": "POST",
+                    "data": {"pac_rut_mod": $("#pac_rut").val()}
+                }
+
+                $.ajax(settings).done(function (response) {
+                    $('.resultado').html('');
+                    $('.resultado').html(response)
+                    eliminar();
+                });
+            }
+
+            function eliminar() {
+                $(".btn_eliminar").on("click", function (e) {
+                    var id = $(this).attr("attr-id");
+                    var settings = {
+                        "url": "buscaAtencion.php",
+                        "method": "POST",
+                        "data": {"id_eliminar": id}
+                    }
+
+                    $.ajax(settings).done(function (response) {
+                        $('.resultadoEli').html('');
+                        $('.resultadoEli').html(response)
+                        agregarM();
+
+                    });
+                });
+            }
+        });
+    </script>
+</body>
 </html>

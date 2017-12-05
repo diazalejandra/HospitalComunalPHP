@@ -41,7 +41,21 @@ if (isset($_POST['btn_registro'])) {
                     source: 'search.php'
                 });
             });
-        </script>
+
+            $(document).ready(function () {
+                $("input#con_paciente").rut({
+                    //formatOn: 'keyup',
+                    minimumLength: 0, // validar largo mínimo; default: 2
+                    validateOn: 'null' // si no se quiere validar, pasar null
+                });
+
+
+                $("input#con_paciente").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    $('input#con_paciente').val('');
+                    alert("El rut " + $(this).val() + " es inválido");
+                });
+            });
+        </script> 
     </head>
     <body>
         <?php

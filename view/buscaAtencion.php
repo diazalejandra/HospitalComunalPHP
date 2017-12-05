@@ -33,11 +33,15 @@ if (isset($_POST["pac_rut"]) || isset($_POST["med_rut"])) {
     }
 }
 
-if (isset($_POST["pac_rut_mod"]) || isset($_POST["med_rut_mod"])) {
+if (isset($_POST["pac_rut_mod"]) || isset($_POST["med_rut_mod"]) || isset($_POST["btn_buscar_est"]) || isset($_POST["btn_act_con"])) {
     if (isset($_POST["pac_rut_mod"])) {
         $listar = Consulta::buscarPorRut($_POST["pac_rut_mod"]);
     } elseif (isset($_POST["med_rut_mod"])) {
         $listar = Consulta::buscarPorRut($_POST["med_rut_mod"]);
+    } elseif (isset($_POST["btn_buscar_est"])) {
+        $listar = Consulta::buscarPorEstado($_POST["btn_buscar_est"]);
+    } elseif (isset($_POST["btn_act_con"])) {
+        $listar = Consulta::buscarPendientes();
     }
     if ($listar != null) {
         echo "<form name='frm_actualizar' action='actualizarAtencion.php' method='POST'>";
