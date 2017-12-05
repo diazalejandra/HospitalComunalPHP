@@ -1,3 +1,7 @@
+<?php
+ session_start();
+ session_destroy();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +30,7 @@
                                 </div>
                                 <button type="submit" name="btn_login" class="btn btn-default btn_style">INGRESAR</button>                            
                             </form>
-                            <div class="register">¿No tiene una cuenta? <a href="./view/registro.php">Regístrese</a></div>
+                            <div class="register">¿Paciente nuevo? <a href="./view/registro.php">Regístrese</a></div>
                         </section>    
                     </div>
                 </div>

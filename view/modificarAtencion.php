@@ -60,6 +60,8 @@ include_once '/partial/session.php';
             </form>
             <div class="resultado"></div>
         </section>
+            <div class="resultadoEli"></div>
+        </section>
 
         <script>
             $(document).ready(function () {
@@ -76,26 +78,44 @@ include_once '/partial/session.php';
                     var settings = {
                         "url": "buscaAtencion.php",
                         "method": "POST",
-                        "data": {"med_rut": $("#med_rut").val()}
+                        "data": {"med_rut_mod": $("#med_rut").val()}
                     }
 
                     $.ajax(settings).done(function (response) {
                         $('.resultado').html('');
                         $('.resultado').html(response)
-                        // eliminar();
+                        eliminar();
                     });
                 }
                 function agregarP() {
                     var settings = {
                         "url": "buscaAtencion.php",
                         "method": "POST",
-                        "data": {"pac_rut": $("#pac_rut").val()}
+                        "data": {"pac_rut_mod": $("#pac_rut").val()}
                     }
 
                     $.ajax(settings).done(function (response) {
                         $('.resultado').html('');
                         $('.resultado').html(response)
-                        // eliminar();
+                        eliminar();
+                    });
+                }
+                
+                function eliminar() {
+                    $(".btn_eliminar").on("click", function (e) {
+                        var id = $(this).attr("attr-id");
+                        var settings = {
+                            "url": "buscaAtencion.php",
+                            "method": "POST",
+                            "data": {"id_eliminar": id}
+                        }
+
+                        $.ajax(settings).done(function (response) {
+                            $('.resultadoEli').html('');
+                            $('.resultadoEli').html(response)
+                            agregarM();
+
+                        });
                     });
                 }
             });

@@ -42,13 +42,48 @@ if (isset($_POST["pac_rut"])) {
     } else {
         echo "No existe informacion para mostrar";
     }
+}
 
-    if (isset($_POST["id_usuario"])) {
-        if (!Usuario::eliminar($_POST["id_usuario"])) {
-            echo "<script type=\"text/javascript\"> alert(\"No se ha podido eliminar.\");</script>";
-        } else {
-
-            echo "<script type=\"text/javascript\"> alert(\"Se ha eliminado el usuario.\");</script>";
+if (isset($_POST["pac_rut_mod"])) {
+    if (Paciente::ver($_POST["pac_rut_mod"]) != null) {
+        $lista = Paciente::ver($_POST["pac_rut_mod"]);
+        echo "<form name='frm_actualizar' action='actualizarPaciente.php' method='POST'>";
+        echo "<table class='table table-hover table-responsive'>";
+        echo "<tr> ";
+        echo "<th> Rut </th> ";
+        echo "<th> Nombre </th> ";
+        echo "<th> Apellido </th> ";
+        echo "<th> Fecha de Nacimiento </th> ";
+        echo "<th> Sexo </th> ";
+        echo "<th> Direccion </th> ";
+        echo "<th> Telefono </th> ";
+        echo "<th> Opciones </th> ";
+        echo "</tr>";
+        for ($i = 0; $i < count($lista); $i++) {
+            echo "<tr> ";
+            echo "<td> " . $lista[$i]->getPac_rut() . "</td> ";
+            echo "<td> " . $lista[$i]->getPac_nombre() . "</td> ";
+            echo "<td> " . $lista[$i]->getPac_apellido() . "</td> ";
+            echo "<td> " . $lista[$i]->getPac_nacimiento() . "</td> ";
+            echo "<td> " . $lista[$i]->getPac_sexo() . "</td> ";
+            echo "<td> " . $lista[$i]->getPac_direccion() . "</td> ";
+            echo "<td> " . $lista[$i]->getPac_telefono() . "</td> ";
+            echo "<td> <input type=\"button\" class=\"btn_eliminar\" value=\"Eliminar\" attr-id=\"" . $lista[$i]->getPac_rut() . "\" /> "
+            . "<button type=\"submit\" class=\"btn_modificar\" name=\"btn_modificar\" value=\"" . $lista[$i]->getPac_rut() . "\">Modificar</button></td> ";
+            echo "</tr>";
         }
+        echo "</table></form>";
+    } else {
+        echo "No existe informacion para mostrar";
     }
 }
+
+if (isset($_POST["rut_eliminar"])) {
+    if (!Paciente::eliminar($_POST["rut_eliminar"]) && !Usuario::eliminar($_POST["rut_eliminar"])) {
+        echo "<script type=\"text/javascript\"> alert(\"No se ha podido eliminar.\");</script>";
+    } else {
+
+        echo "<script type=\"text/javascript\"> alert(\"Se ha eliminado el paciente.\");</script>";
+    }
+}
+

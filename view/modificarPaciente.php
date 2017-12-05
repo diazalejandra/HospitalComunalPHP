@@ -1,5 +1,6 @@
 <?php
 include_once '/partial/session.php';
+include_once '../controller/Usuario.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,8 +12,8 @@ include_once '/partial/session.php';
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
             $(function () {
-                $("#med_rut").autocomplete({
-                    source: 'buscaMedico.php'
+                $("#pac_rut").autocomplete({
+                    source: 'buscaPaciente.php'
                 });
             });
         </script>
@@ -25,13 +26,13 @@ include_once '/partial/session.php';
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Buscar Medico</legend>
+                    <legend>Modificar Paciente</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="med_rut">Rut</label>  
+                        <label class="col-md-4 control-label" for="pac_rut">Rut</label>  
                         <div class="col-md-4">
-                            <input id="med_rut" name="med_rut" type="text" placeholder="12345678-9" class="form-control input-md" required="">
+                            <input id="pac_rut" name="pac_rut" type="text" placeholder="12345678-9" class="form-control input-md" required="">
 
                         </div>
                         <div class="col-md-4">
@@ -41,7 +42,12 @@ include_once '/partial/session.php';
 
                 </fieldset>
             </form>
-            <div class="resultado"></div>
+            <div class="resultado">
+
+            </div>
+            <div class="resultadoEli">
+
+            </div>
         </section>
 
         <script>
@@ -53,15 +59,33 @@ include_once '/partial/session.php';
 
                 function agregar() {
                     var settings = {
-                        "url": "buscaMedico.php",
+                        "url": "buscaPaciente.php",
                         "method": "POST",
-                        "data": {"med_rut": $("#med_rut").val()}
+                        "data": {"pac_rut_mod": $("#pac_rut").val()}
                     }
-                
+
                     $.ajax(settings).done(function (response) {
                         $('.resultado').html('');
                         $('.resultado').html(response)
-                       // eliminar();
+                        eliminar();
+                    });
+                }
+
+                function eliminar() {
+                    $(".btn_eliminar").on("click", function (e) {
+                        var id = $(this).attr("attr-id");
+                        var settings = {
+                            "url": "buscaPaciente.php",
+                            "method": "POST",
+                            "data": {"rut_eliminar": id}
+                        }
+
+                        $.ajax(settings).done(function (response) {
+                            $('.resultadoEli').html('');
+                            $('.resultadoEli').html(response)
+                            agregar();
+                            
+                        });
                     });
                 }
             });

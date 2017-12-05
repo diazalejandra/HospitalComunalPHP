@@ -12,7 +12,7 @@ class Paciente {
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             $lista = [];
-            
+
             foreach ($resultado as $value) {
                 $dto = new PacienteModel();
                 $dto->setPac_rut($value["pac_rut"]);
@@ -76,6 +76,7 @@ class Paciente {
             $stmt->bindParam(1, $pac_rut);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
+            $lista = [];
 
             foreach ($resultado as $value) {
                 $dto = new PacienteModel();
@@ -105,7 +106,7 @@ class Paciente {
             $pac_direccion = $dto->getPac_direccion();
             $pac_telefono = $dto->getPac_telefono();
 
-            $stmt = $db->prepare("UPDATE paciente SET pac_nombre = ?, pac_apellido = ?, pac_nacimiento = ?, pac_sexo = ?, pac_direccion = ?, pac_telefono ? "
+            $stmt = $db->prepare("UPDATE paciente SET pac_nombre = ?, pac_apellido = ?, pac_nacimiento = ?, pac_sexo = ?, pac_direccion = ?, pac_telefono = ? "
                     . "WHERE pac_rut = ?");
             $stmt->bindParam(1, $pac_nombre);
             $stmt->bindParam(2, $pac_apellido);
@@ -120,6 +121,5 @@ class Paciente {
         }
         return false;
     }
+
 }
-
-

@@ -4,12 +4,18 @@ include_once '../controller/Medico.php';
 include_once '../model/MedicoModel.php';
 include_once '../controller/Usuario.php';
 
+if (isset($_POST["btn_modificar"])) {
+    $lista = Medico::ver($_POST["btn_modificar"])[0];
+}
+print_r($lista);
+
 if (isset($_POST['btn_registro'])) {
     $usuario = new UsuarioModel();
-    $usuario->setUsu_id($_POST['med_rut']);
-    $usuario->setUsu_nombre($_POST['med_nombre'] . " " . $_POST['med_apellido']);
+    $usuario->setUsu_id($_POST['pac_rut']);
+    $usuario->setUsu_nombre($_POST['pac_nombre']);
+    $usuario->setUsu_apellido($_POST['pac_apellido']);
     $usuario->setUsu_perfil('MED');
-    $usuario->setUsu_password($_POST['med_password']);
+    $usuario->setUsu_password($_POST['pac_password']);
 
     $medico = new MedicoModel();
     $medico->setMed_rut($_POST['med_rut']);
@@ -19,10 +25,12 @@ if (isset($_POST['btn_registro'])) {
     $medico->setMed_especialidad($_POST['med_especialidad']);
     $medico->setMed_valor($_POST['med_consulta']);
 
-    if (Usuario::crear($usuario) && Medico::crear($medico)) {
-        echo "<script type=\"text/javascript\"> alert(\"Medico creado\");</script>";
+    if (Usuario::editar($usuario) && Medico::editar($medico)) {
+        echo "<script type=\"text/javascript\"> alert(\"Medico actualizado\");</script>";
+        echo "<script>location.href='modificarMedico.php';</script>";
     } else {
-        echo "<script type=\"text/javascript\"> alert(\"Error al crear Medico\");</script>";
+        echo "<script type=\"text/javascript\"> alert(\"Error al actualizar Medico\");</script>";
+        echo "<script>location.href='modificarMedico.php';</script>";
     }
 }
 ?>
@@ -42,13 +50,13 @@ if (isset($_POST['btn_registro'])) {
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Agregar Médico</legend>
+                    <legend>Modificar Médico</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_rut">Rut</label>  
                         <div class="col-md-4">
-                            <input id="med_rut" name="med_rut" type="text" placeholder="12345678-9" class="form-control input-md" required="">
+                            <input id="med_rut" name="med_rut" type="text" value="<?php echo $lista->getMed_rut(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -57,7 +65,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_nombre">Nombre</label>  
                         <div class="col-md-4">
-                            <input id="med_nombre" name="med_nombre" type="text" placeholder="Juan" class="form-control input-md" required="">
+                            <input id="med_nombre" name="med_nombre" type="text" value="<?php echo $lista->getMed_nombre(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -66,7 +74,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_apellido">Apellido</label>  
                         <div class="col-md-4">
-                            <input id="med_apellido" name="med_apellido" type="text" placeholder="Perez" class="form-control input-md" required="">
+                            <input id="med_apellido" name="med_apellido" type="text" value="<?php echo $lista->getMed_apellido(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -75,7 +83,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_especialidad">Especialidad</label>  
                         <div class="col-md-4">
-                            <input id="med_especialidad" name="med_especialidad" type="text" placeholder="Médico Cirujano" class="form-control input-md" required="">
+                            <input id="med_especialidad" name="med_especialidad" type="text" value="<?php echo $lista->getMed_especialidad(); ?>" class="form-control input-md" required="">
                             <span class="help-block"> </span>  
                         </div>
                     </div>
@@ -84,7 +92,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_contrato">Fecha de Contratación</label>  
                         <div class="col-md-4">
-                            <input id="med_contrato" name="med_contrato" type="date" placeholder="" class="form-control input-md" required="">
+                            <input id="med_contrato" name="med_contrato" type="date" value="<?php echo $lista->getMed_contrato(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -93,7 +101,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_consulta">Valor Consulta</label>  
                         <div class="col-md-4">
-                            <input id="med_consulta" name="med_consulta" type="number" placeholder="40000" class="form-control input-md" required="">
+                            <input id="med_consulta" name="med_consulta" type="number" value="<?php echo $lista->getMed_valor(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -112,7 +120,6 @@ if (isset($_POST['btn_registro'])) {
                         <label class="col-md-4 control-label" for="btn_registro"></label>
                         <div class="col-md-4">
                             <button id="btn_registro" name="btn_registro" class="btn btn-primary">Agregar</button>
-                            <button id="btn_limpiar" name="btn_limpiar" class="btn btn-default" type="reset">Limpiar</button>
                         </div>
                     </div>
                 </fieldset>

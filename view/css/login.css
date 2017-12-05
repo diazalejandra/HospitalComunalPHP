@@ -68,5 +68,21 @@ body {
 a:link, a:visited {
     color: white;
     text-decoration: none;
-    }
+}
+
+#titulo{
+    text-align: center;
+    color: white;
+    font-size: large;
+    
+}
+
+#pac_sexo{
+  display: inline;
+  width: 88.9%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 

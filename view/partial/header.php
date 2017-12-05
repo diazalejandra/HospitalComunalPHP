@@ -41,7 +41,7 @@ if (isset($_SESSION['userlogin'])){
                     <ul class="dropdown-menu">
                         <li><a href="./agregarMedico.php">Agregar</a></li>
                         <li><a href="./buscarMedico.php">Buscar</a></li>
-                        <li><a href="./agregarProducto.php">Modificar</a></li>
+                        <li><a href="./modificarMedico.php">Modificar</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -49,7 +49,7 @@ if (isset($_SESSION['userlogin'])){
                     <ul class="dropdown-menu">
                         <li><a href="./agregarPaciente.php">Agregar</a></li>
                         <li><a href="./buscarPaciente.php">Buscar</a></li>
-                        <li><a href="./agregarProducto.php">Modificar</a></li>
+                        <li><a href="./modificarPaciente.php">Modificar</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -57,7 +57,7 @@ if (isset($_SESSION['userlogin'])){
                     <ul class="dropdown-menu">
                         <li><a href="./agregarAtencion.php">Agregar</a></li>
                         <li><a href="./buscarAtencion.php">Buscar</a></li>
-                        <li><a href="./agregarProducto.php">Modificar</a></li>
+                        <li><a href="./modificarAtencion.php">Modificar</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -73,7 +73,7 @@ if (isset($_SESSION['userlogin'])){
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido <?php echo $usuario->getUsu_nombre() ;?>  <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Perfil</a></li>
-                        <li><a href="#" id="cerrar_sesion">Cerrar Sesión</a></li>
+                        <li><a href="../index.php" id="cerrar_sesion">Cerrar Sesión</a></li>
                     </ul>
                 </li>
             </ul>

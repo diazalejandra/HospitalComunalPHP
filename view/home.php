@@ -1,6 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.php';
-session_start();
+include_once '/partial/session.php';
 include_once '../controller/Usuario.php';
 
 if (isset($_POST['btn_login'])) {

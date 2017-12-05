@@ -48,7 +48,7 @@ class Consulta {
         return false;
     }
 
-    public static function eliminar($id_oc) {
+    public static function eliminar($con_id) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM consulta WHERE con_id = ?");
@@ -68,7 +68,8 @@ class Consulta {
             $stmt->bindParam(1, $con_id);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
-
+            $lista = [];
+            
             foreach ($resultado as $value) {
                 $dto = new ConsultaModel();
                 $dto->setCon_id($value["con_id"]);
@@ -86,6 +87,7 @@ class Consulta {
 
     public static function editar($dto) {
         try {
+            $lista = [];
             $db = new ConexionDB();
             $con_id = $dto->getCon_id();
             $con_fecha = $dto->getCon_fecha();
@@ -119,6 +121,7 @@ class Consulta {
             $stmt->bindParam(2, $rut);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
+            $lista = [];
 
             foreach ($resultado as $value) {
                 $dto = new ConsultaModel();

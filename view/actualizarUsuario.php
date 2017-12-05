@@ -4,6 +4,11 @@ include_once '../controller/Usuario.php';
 include_once '../controller/Perfil.php';
 $lista = Perfil::listar();
 
+if (isset($_POST["btn_modificar"])) {
+    $modificar = Usuario::ver($_POST["btn_modificar"])[0];
+}
+print_r($modificar);
+
 if (isset($_POST['btn_registro'])) {
     $usuario = new UsuarioModel();
     $usuario->setUsu_id($_POST['usu_id']);
@@ -12,10 +17,12 @@ if (isset($_POST['btn_registro'])) {
     $usuario->setUsu_perfil($_POST['usu_perfil']);
     $usuario->setUsu_password($_POST['usu_password']);
 
-    if (Usuario::crear($usuario)) {
-        echo "<script type=\"text/javascript\"> alert(\"Usuario creado\");</script>";
+    if (Usuario::editar($usuario)) {
+        echo "<script type=\"text/javascript\"> alert(\"Usuario actualizado\");</script>";
+        echo "<script>location.href='modificarUsuario.php';</script>";
     } else {
-        echo "<script type=\"text/javascript\"> alert(\"Error al crear usuario\");</script>";
+        echo "<script type=\"text/javascript\"> alert(\"Error al actualizar usuario\");</script>";
+        echo "<script>location.href='modificarUsuario.php';</script>";
     }
 }
 ?>
@@ -41,7 +48,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_id">Rut</label>  
                         <div class="col-md-4">
-                            <input id="usu_id" name="usu_id" type="text" placeholder="12345678-9" class="form-control input-md" required="">
+                            <input id="usu_id" name="usu_id" type="text" value="<?php echo $modificar->getUsu_id(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -50,7 +57,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_nombre">Nombre</label>  
                         <div class="col-md-4">
-                            <input id="usu_nombre" name="usu_nombre" type="text" placeholder="Juan" class="form-control input-md" required="">
+                            <input id="usu_nombre" name="usu_nombre" type="text" value="<?php echo $modificar->getUsu_nombre(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -59,7 +66,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_apellido">Apellido</label>  
                         <div class="col-md-4">
-                            <input id="usu_apellido" name="usu_apellido" type="text" placeholder="Perez" class="form-control input-md" required="">
+                            <input id="usu_apellido" name="usu_apellido" type="text" value="<?php echo $modificar->getUsu_apellido(); ?>" class="form-control input-md" required="">
 
                         </div>
                     </div>
@@ -68,12 +75,12 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_perfil">Perfil</label>
                         <div class="col-md-4">
-                        <select id="usu_perfil" name="usu_perfil" required>
-                            <option value="">-- Selecionar Perfil --</option>
-                            <?php foreach ($lista as $value) { ?>
-                                <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
-                            <?php } ?>
-                        </select>  
+                            <select id="usu_perfil" name="usu_perfil" required>
+                                <option value="">-- Selecionar Perfil --</option>
+                                <?php foreach ($lista as $value) { ?>
+                                    <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
+                                <?php } ?>
+                            </select>  
                         </div>
                     </div>
 
@@ -90,8 +97,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="btn_registro"></label>
                         <div class="col-md-4">
-                            <button id="btn_registro" name="btn_registro" class="btn btn-primary">Agregar</button>
-                            <button id="btn_limpiar" name="btn_limpiar" class="btn btn-default" type="reset">Limpiar</button>
+                            <button id="btn_registro" name="btn_registro" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                 </fieldset>

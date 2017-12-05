@@ -73,7 +73,8 @@ class Medico {
             $stmt->bindParam(1, $med_rut);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
-
+            $lista = [];
+            
             foreach ($resultado as $value) {
                 $dto = new MedicoModel();
                 $dto->setMed_rut($value["med_rut"]);

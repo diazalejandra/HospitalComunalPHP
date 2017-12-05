@@ -1,6 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.php';
-session_start();
+include_once '/partial/session.php';
 ?>
 <!DOCTYPE html>
 <html>

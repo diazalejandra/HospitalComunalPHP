@@ -1,8 +1,6 @@
 <?php
-include_once '../model/UsuarioModel.php';
-session_start();
+include_once '/partial/session.php';
 include_once '../controller/Usuario.php';
-$lista = Usuario::listar();
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +26,7 @@ $lista = Usuario::listar();
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Buscar Usuario</legend>
+                    <legend>Modificar Usuario</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
@@ -45,27 +43,10 @@ $lista = Usuario::listar();
                 </fieldset>
             </form>
             <div class="resultado">
-                <table class='table table-hover table-responsive'>
-                    <tr> 
-                        <th> Rut </th> 
-                        <th> Nombre </th>
-                        <th> Perfil </th> 
-                        <th> Opciones </th>
-                    </tr>
-                    <?php for ($i = 0; $i < count($lista); $i++) { ?>
-                        <tr> 
-                            <td> <?php echo $lista[$i]->getUsu_id(); ?></td>
-                            <td> <?php echo $lista[$i]->getUsu_nombre(); ?></td>
-                            <td> <?php echo $lista[$i]->getUsu_perfil(); ?></td>
-                            <td> <input type="button" class="btn_eliminar" value="Eliminar" attr-id="<?php $lista[$i]->getUsu_id(); ?>"/>
-                                 <input type="button" class="btn_modificar" value="Modificar" attr-id="<?php $lista[$i]->getUsu_id(); ?>"/>                          
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+
             </div>
             <div class="resultadoEli">
-                
+
             </div>
         </section>
 
@@ -96,13 +77,14 @@ $lista = Usuario::listar();
                         var settings = {
                             "url": "buscaUsuario.php",
                             "method": "POST",
-                            "data": {"id_usuario": id}
+                            "data": {"id_eliminar": id}
                         }
 
                         $.ajax(settings).done(function (response) {
-                        $('.resultadoEli').html('');
-                        $('.resultadoEli').html(response)
+                            $('.resultadoEli').html('');
+                            $('.resultadoEli').html(response)
                             agregar();
+                            
                         });
                     });
                 }

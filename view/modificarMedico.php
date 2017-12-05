@@ -25,7 +25,7 @@ include_once '/partial/session.php';
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Buscar Medico</legend>
+                    <legend>Modificar Medico</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
@@ -42,6 +42,7 @@ include_once '/partial/session.php';
                 </fieldset>
             </form>
             <div class="resultado"></div>
+            <div class="resultadoEli"></div>
         </section>
 
         <script>
@@ -55,13 +56,31 @@ include_once '/partial/session.php';
                     var settings = {
                         "url": "buscaMedico.php",
                         "method": "POST",
-                        "data": {"med_rut": $("#med_rut").val()}
+                        "data": {"med_rut_mod": $("#med_rut").val()}
                     }
-                
+
                     $.ajax(settings).done(function (response) {
                         $('.resultado').html('');
                         $('.resultado').html(response)
-                       // eliminar();
+                        eliminar();
+                    });
+                }
+
+                function eliminar() {
+                    $(".btn_eliminar").on("click", function (e) {
+                        var id = $(this).attr("attr-id");
+                        var settings = {
+                            "url": "buscaMedico.php",
+                            "method": "POST",
+                            "data": {"rut_eliminar": id}
+                        }
+
+                        $.ajax(settings).done(function (response) {
+                            $('.resultadoEli').html('');
+                            $('.resultadoEli').html(response)
+                            agregar();
+
+                        });
                     });
                 }
             });
