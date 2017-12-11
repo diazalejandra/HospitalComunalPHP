@@ -8,6 +8,13 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link href="https://bootswatch.com/3/cerulean/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="view/css/login.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="./view/js/jquery.rut.js"></script>
+        <script language="javascript">
+            $(document).ready(function () {
+                $("input#usu_id").rut({formatOn: 'keyup', useThousandsSeparator : false});
+            });
+        </script>        
     </head>
     <body>
         <div class="custom_body">

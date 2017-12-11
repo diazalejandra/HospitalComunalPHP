@@ -7,7 +7,6 @@ $lista = Perfil::listar();
 if (isset($_POST["btn_modificar"])) {
     $modificar = Usuario::ver($_POST["btn_modificar"])[0];
 }
-print_r($modificar);
 
 if (isset($_POST['btn_registro'])) {
     $usuario = new UsuarioModel();
@@ -35,15 +34,7 @@ if (isset($_POST['btn_registro'])) {
         <script src="js/jquery.rut.js"></script>
         <script language="javascript">
             $(document).ready(function () {
-                $("input#usu_id").rut({
-                    //formatOn: 'keyup',
-                    minimumLength: 0, // validar largo mínimo; default: 2
-                    validateOn: 'null' // si no se quiere validar, pasar null
-                });
-
-
-                $("input#usu_id").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
-                    $('input#usu_id').val('');
+                $("input#usu_id").rut({formatOn: 'keyup', useThousandsSeparator: false, validateOn: 'change'}).on('rutInvalido', function(e) {
                     alert("El rut " + $(this).val() + " es inválido");
                 });
             });
@@ -58,7 +49,7 @@ if (isset($_POST['btn_registro'])) {
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Agregar Usuario</legend>
+                    <legend>Actualizar Usuario</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
@@ -91,7 +82,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_perfil">Perfil</label>
                         <div class="col-md-4">
-                            <select id="usu_perfil" name="usu_perfil" required>
+                            <select id="usu_perfil" name="usu_perfil" class="selectpicker form-control" required>
                                 <option value="">-- Selecionar Perfil --</option>
                                 <?php foreach ($lista as $value) { ?>
                                     <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>

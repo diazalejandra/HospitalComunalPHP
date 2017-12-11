@@ -17,6 +17,7 @@ if (isset($_POST['btn_registro'])) {
     $paciente->setPac_nombre($_POST['pac_nombre']);
     $paciente->setPac_apellido($_POST['pac_apellido']);
     $paciente->setPac_direccion($_POST['pac_direccion']);
+    $paciente->setPac_nacimiento($_POST['pac_nacimiento']);
     $paciente->setPac_sexo($_POST['pac_sexo']);
     $paciente->setPac_telefono($_POST['pac_telefono']);
 
@@ -42,70 +43,114 @@ if (isset($_POST['btn_registro'])) {
         <script src="js/jquery.rut.js"></script>
         <script language="javascript">
             $(document).ready(function () {
-                $("input#pac_rut").rut({
-                    //formatOn: 'keyup',
-                    minimumLength: 0, // validar largo mínimo; default: 2
-                    validateOn: 'null' // si no se quiere validar, pasar null
-                });
-
-
-                $("input#pac_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
-                    $('input#pac_rut').val('');
-                    //alert("El rut " + $(this).val() + " es inválido");
+                $("input#pac_rut").rut({formatOn: 'keyup', useThousandsSeparator: false}).on('rutInvalido', function (e) {
+                    alert("El rut " + $(this).val() + " es inválido");
+                    $("input#pac_rut").val('');
                 });
             });
         </script>
     </head>
     <body>
-        <div class="custom_body">
-            <div class="container">
-                <div class="row">
-                    <div class="login_box">
-                        <section class="main-box">
-                            <form name="frm_registro" action="" method="POST">
+        <section class="container">
+            <form class="form-horizontal" action="" method="POST" id="registro">
+                <fieldset>
 
-                                <div class="input-box" id="titulo">
-                                    <b>REGISTRO DE PACIENTE</b>
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                                    <input id="pac_rut" type="text" class="form-control input_layout" name="pac_rut" placeholder="RUT" minlength="1" maxlength="10" required="">
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="pac_nombre" type="text" class="form-control input_layout" name="pac_nombre" placeholder="Nombre" minlength="1" maxlength="30" required="">
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="pac_apellido" type="text" class="form-control input_layout" name="pac_apellido" placeholder="Apellido" minlength="1" maxlength="30" required="">
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input id="pac_direccion" type="text" class="form-control input_layout" name="pac_direccion" placeholder="Direccion" minlength="1" maxlength="30" required="">
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                    <input id="pac_telefono" type="number" class="form-control input_layout" name="pac_telefono" placeholder="Telefono" required="">
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <select id="pac_sexo" name="pac_sexo" class="form-control" required="">
-                                        <option value="">SELECCIONE SEXO</option>
-                                        <option value="F">Femenino</option>
-                                        <option value="M">Masculino</option>
-                                    </select>
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="pac_password" type="password" class="form-control input_layout" name="pac_password" placeholder="Password" minlength="1" maxlength="30" required="">
-                                </div>
-                                <button type="submit" name="btn_registro" class="btn btn-default btn_style">REGISTRAR</button>
-                            </form>                       
-                        </section>    
+                    <!-- Form Name -->
+                    <legend>Datos Personales</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_rut">Rut</label>  
+                        <div class="col-md-6">
+                            <input id="pac_rut" name="pac_rut" type="text" placeholder="12345678-9" class="form-control input-md" maxlength="10" required="">
+
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>  
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_nombre">Nombre</label>  
+                        <div class="col-md-6">
+                            <input id="pac_nombre" name="pac_nombre" type="text" placeholder="Juan" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_apellido">Apellido</label>  
+                        <div class="col-md-6">
+                            <input id="pac_apellido" name="pac_apellido" type="text" placeholder="Perez" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_nacimiento">Fecha de Nacimiento</label>  
+                        <div class="col-md-6">
+                            <input id="pac_nacimiento" name="pac_nacimiento" type="date" placeholder="" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Multiple Radios -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_sexo">Sexo</label>
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label for="pac_sexo-0">
+                                    <input type="radio" name="pac_sexo" id="pac_sexo-0" value="F" checked="checked">
+                                    Femenino
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="pac_sexo-1">
+                                    <input type="radio" name="pac_sexo" id="pac_sexo-1" value="M">
+                                    Masculino
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_direccion">Dirección</label>  
+                        <div class="col-md-6">
+                            <input id="pac_direccion" name="pac_direccion" type="text" placeholder="Av. Uno 123, Santiago" class="form-control input-md" required="">
+                            <span class="help-block"> </span>  
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_telefono">Teléfono</label>  
+                        <div class="col-md-6">
+                            <input id="pac_telefono" name="pac_telefono" type="text" placeholder="987654432" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="pac_password">Contraseña</label>
+                        <div class="col-md-6">
+                            <input id="usu_password" name="pac_password" type="password" placeholder="" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btn_registro"></label>
+                        <div class="col-md-8">
+                            <button id="btn_registro" name="btn_registro" class="btn btn-primary">Registrarse</button>
+                            <button id="btn_volver" name="btn_volver" class="btn btn-default" type="button" onclick="location.href = '../index.php'">Volver</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
     </body>
 </html>
 

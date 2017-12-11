@@ -43,15 +43,7 @@ if (isset($_POST['btn_registro'])) {
             });
 
             $(document).ready(function () {
-                $("input#con_paciente").rut({
-                    //formatOn: 'keyup',
-                    minimumLength: 0, // validar largo mínimo; default: 2
-                    validateOn: 'null' // si no se quiere validar, pasar null
-                });
-
-
-                $("input#con_paciente").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
-                    $('input#con_paciente').val('');
+                $("input#con_paciente").rut({formatOn: 'keyup', useThousandsSeparator: false, validateOn: 'change'}).on('rutInvalido', function(e) {
                     alert("El rut " + $(this).val() + " es inválido");
                 });
             });
@@ -91,7 +83,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="con_medico">Médico</label>  
                         <div class="col-md-4">
-                        <select id="con_medico" name="con_medico" required>
+                        <select id="con_medico" name="con_medico" class="selectpicker form-control" required>
                             <option value="">-- Selecionar Medico --</option>
                             <?php foreach ($listaM as $value) { ?>
                             <option value="<?php echo $value->getMed_rut(); ?>"><?php echo $value->getMed_apellido() . ", " . $value->getMed_nombre(); ?></option>

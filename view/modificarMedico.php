@@ -18,15 +18,7 @@ include_once '/partial/session.php';
             });
             
             $(document).ready(function () {
-                $("input#med_rut").rut({
-                    //formatOn: 'keyup',
-                    minimumLength: 0, // validar largo mínimo; default: 2
-                    validateOn: 'null' // si no se quiere validar, pasar null
-                });
-
-
-                $("input#med_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
-                    $('input#med_rut').val('');
+                $("input#med_rut").rut({formatOn: 'keyup', useThousandsSeparator: false, validateOn: 'change'}).on('rutInvalido', function(e) {
                     alert("El rut " + $(this).val() + " es inválido");
                 });
             });

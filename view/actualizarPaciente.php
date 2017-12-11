@@ -42,15 +42,7 @@ if (isset($_POST['btn_registro'])) {
         <script src="js/jquery.rut.js"></script>
         <script language="javascript">
             $(document).ready(function () {
-                $("input#pac_rut").rut({
-                    //formatOn: 'keyup',
-                    minimumLength: 0, // validar largo mínimo; default: 2
-                    validateOn: 'null' // si no se quiere validar, pasar null
-                });
-
-
-                $("input#pac_rut").rut({useThousandsSeparator: false}).on('rutInvalido', function (e) {
-                    $('input#pac_rut').val('');
+                $("input#pac_rut").rut({formatOn: 'keyup', useThousandsSeparator: false, validateOn: 'change'}).on('rutInvalido', function(e) {
                     alert("El rut " + $(this).val() + " es inválido");
                 });
             });

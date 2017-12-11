@@ -9,33 +9,32 @@ if (isset($_POST['btn_fecha'])) {
         echo "<script type=\"text/javascript\"> alert(\"No existen datos a consultar\");</script>";
     }
 }
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Hospital Tetengo</title>
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />   
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <style>
+            .menu{
+                width: 100%;
+            }
 
-    ?>
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Hospital Tetengo</title>
-            <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />   
-            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-            <style>
-                .menu{
-                    width: 100%;
-                }
+            td{
+                width: 130px;
+            }
 
-                td{
-                    width: 130px;
-                }
-
-                table{
-                    margin: 0 0 25px;
-                }
-            </style>
-        <body>
-            <?php
-            include_once 'partial/header.php';
-            ?>
+            table{
+                margin: 0 0 25px;
+            }
+        </style>
+    <body>
+        <?php
+        include_once 'partial/header.php';
+        ?>
         <section class="container">
             <form class="form-horizontal" action="" method="POST">
                 <fieldset>
@@ -65,22 +64,23 @@ if (isset($_POST['btn_fecha'])) {
                 </fieldset>
             </form>
 
+
+            <?php if ($lista != null) { ?>
+                <table class='table table-hover table-responsive'>
+                    <tr>
+                        <th>Cantidad (total)</th>
+                        <th>Valorizacion (promedio)</th>
+                    </tr>
+                    <?php for ($i = 0; $i < count($lista); $i++) { ?>
+                        <tr>
+                            <td><?php echo $lista[$i]->getCon_cantidad() ?></td>
+                            <td><?php echo $lista[$i]->getCon_valorizacion() ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>    
+
+            <?php } ?>
         </section>
-        <?php if($lista != null){ ?>
-            <table>
-                <tr>
-                    <th>Cantidad (total)</th>
-                    <th>Valorizacion (promedio)</th>
-                </tr>
-                <?php for ($i = 0; $i < count($lista); $i++) { ?>
-                <tr>
-                    <td><?php $lista[$i]->getCon_cantidad() ?></td>
-                    <td><?php $lista[$i]->getCon_valorizacion() ?></td>
-                </tr>
-                <?php } ?>
-            </table>    
-            
-        <?php } ?>
-    
-</body>
+
+    </body>
 </html>
