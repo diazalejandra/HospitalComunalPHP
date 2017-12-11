@@ -55,7 +55,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="usu_id">Rut</label>  
                         <div class="col-md-4">
-                            <input id="usu_id" name="usu_id" type="text" value="<?php echo $modificar->getUsu_id(); ?>" class="form-control input-md" required="">
+                            <input id="usu_id" name="usu_id" type="text" value="<?php echo $modificar->getUsu_id(); ?>" class="form-control input-md" readonly="">
 
                         </div>
                     </div>
@@ -83,10 +83,11 @@ if (isset($_POST['btn_registro'])) {
                         <label class="col-md-4 control-label" for="usu_perfil">Perfil</label>
                         <div class="col-md-4">
                             <select id="usu_perfil" name="usu_perfil" class="selectpicker form-control" required>
-                                <option value="">-- Selecionar Perfil --</option>
-                                <?php foreach ($lista as $value) { ?>
-                                    <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
-                                <?php } ?>
+                                <option value="<?php echo $modificar->getUsu_perfil(); ?>"><?php echo $modificar->getUsu_perfil_det(); ?></option>
+                                <?php foreach ($lista as $value) { 
+                                    if($value->getPer_id() != $modificar->getUsu_perfil()){?>
+                                        <option value="<?php echo $value->getPer_id(); ?>"><?php echo $value->getPer_descripcion(); ?></option>
+                                <?php }} ?>
                             </select>  
                         </div>
                     </div>

@@ -6,6 +6,7 @@ class UsuarioModel implements JsonSerializable {
     private $usu_apellido;
     private $usu_perfil;
     private $usu_password;
+    private $usu_perfil_det;
     
     function __construct() {
         
@@ -49,6 +50,14 @@ class UsuarioModel implements JsonSerializable {
 
     function setUsu_apellido($usu_apellido) {
         $this->usu_apellido = $usu_apellido;
+    }
+    
+    function getUsu_perfil_det() {
+        return $this->usu_perfil_det;
+    }
+
+    function setUsu_perfil_det($usu_perfil_det) {
+        $this->usu_perfil_det = $usu_perfil_det;
     }
 
     public function jsonSerialize() {

@@ -1,5 +1,6 @@
 <?php
-include_once '/partial/session.php';
+include_once '../model/UsuarioModel.php';
+session_start();
 include_once '../controller/Usuario.php';
 
 if (isset($_POST['btn_login'])) {
@@ -11,12 +12,15 @@ if (isset($_POST['btn_login'])) {
     $usuario->setUsu_password($pass_e);
 
     if (Usuario::login($usuario) != null) {
-        $usuario = Usuario::ver($usuario->getUsu_id());
-        $_SESSION['userlogin'] = $usuario;
+        $_SESSION['userlogin'] = Usuario::ver($usuario->getUsu_id());
     } else {
-        echo "<script type=\"text/javascript\"> alert(\"Usuario o contraseña incorrecta\");</script>";
-      // echo "<script>location.href='../index.php';</script>";
+        $_SESSION['message'] = 'Usuario o contraseña incorrecta';
+        header("Location: ../index.php");
+//        echo "<script type=\"text/javascript\"> alert(\"Usuario o contraseña incorrecta\");</script>";
+//        echo "<script>location.href='../index.php';</script>";
     }
+}elseif (!isset($_SESSION['userlogin'])){
+    header("Location: ../index.php");
 }
 ?>
 <!DOCTYPE html>

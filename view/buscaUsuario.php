@@ -33,7 +33,7 @@ if (isset($_POST["usu_id"])) {
         echo "</td><td>" . $lista[0]->getUsu_apellido() . "</td></tr>";
         for ($i = 0; $i < count($lista); $i++) {
             echo "<tr><td>Perfil</td>";
-            echo "<td>" . $lista[$i]->getUsu_perfil() . "</td></tr>";
+            echo "<td>" . $lista[$i]->getUsu_perfil_det() . "</td></tr>";
         }
         echo "</table>";
     } else {
@@ -58,7 +58,7 @@ if (isset($_POST["usu_id_mod"])) {
             echo "<td> " . $lista[$i]->getUsu_id() . "</td> ";
             echo "<td> " . $lista[$i]->getUsu_nombre() . "</td> ";
             echo "<td> " . $lista[$i]->getUsu_apellido() . "</td> ";
-            echo "<td> " . $lista[$i]->getUsu_perfil() . "</td> ";
+            echo "<td> " . $lista[$i]->getUsu_perfil_det() . "</td> ";
             echo "<td> <input type=\"button\" class=\"btn_eliminar\" value=\"Eliminar\" attr-id=\"" . $lista[$i]->getUsu_id() . "\" /> "
             . "<button type=\"submit\" class=\"btn_modificar\" name=\"btn_modificar\" value=\"" . $lista[$i]->getUsu_id() . "\">Modificar</button></td>";
             echo "</tr>";

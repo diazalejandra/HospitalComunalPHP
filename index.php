@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['message'])) {
+    echo "<script type=\"text/javascript\"> alert(\"Usuario o contraseña incorrecta\");</script>";
+    unset($_SESSION['message']);
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +19,7 @@
         <script src="./view/js/jquery.rut.js"></script>
         <script language="javascript">
             $(document).ready(function () {
-                $("input#usu_id").rut({formatOn: 'keyup', useThousandsSeparator : false});
+                $("input#usu_id").rut({formatOn: 'keyup', useThousandsSeparator: false});
             });
         </script>        
     </head>
@@ -24,11 +31,11 @@
                         <section class="main-box">
                             <form name="frm_login" action="./view/home.php" method="POST">
                                 <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-user fixed" style="height: 16px;"></i></span>
                                     <input id="usu_id" type="text" class="form-control input_layout" name="usu_id" placeholder="RUT" minlength="1" required="">
                                 </div>
                                 <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-lock fixed" style="height: 16px;"></i></span>
                                     <input id="usu_password" type="password" class="form-control input_layout" name="usu_password" placeholder="Contraseña" minlength="1" required="">
                                 </div>
                                 <button type="submit" name="btn_login" class="btn btn-default btn_style">INGRESAR</button>                            

@@ -1,13 +1,16 @@
 <?php
 include_once '/partial/session.php';
 include_once '../controller/Medico.php';
+include_once '../controller/Horario.php';
 include_once '../controller/Consulta.php';
 include_once '../model/ConsultaModel.php';
 $lista = Medico::listar();
+$horario = Horario::listar();
 
 if (isset($_POST['btn_registro'])) {
     $consulta = new ConsultaModel();
     $consulta->setCon_fecha($_POST['con_fecha']);
+    $consulta->setCon_horario($_POST['con_horario']);
     $consulta->setCon_paciente($_POST['con_paciente']);
     $consulta->setCon_medico($_POST['con_medico']);
     $consulta->setCon_estado('AGE');
@@ -62,6 +65,19 @@ if (isset($_POST['btn_registro'])) {
 
                         </div>
                     </div>
+                    
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="con_horario">Horario</label>  
+                        <div class="col-md-4">
+                        <select id="con_horario" name="con_horario" class="selectpicker form-control" required>
+                            <option value="">-- Selecionar Horario --</option>
+                            <?php foreach ($horario as $hor) { ?>
+                            <option value="<?php echo $hor->getHor_id(); ?>"><?php echo $hor->getHor_hora(); ?></option>
+                            <?php } ?>
+                        </select>  
+                        </div>
+                    </div>                    
 
                     <!-- Text input-->
                     <div class="form-group">

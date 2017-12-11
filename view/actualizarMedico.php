@@ -7,7 +7,6 @@ include_once '../controller/Usuario.php';
 if (isset($_POST["btn_modificar"])) {
     $lista = Medico::ver($_POST["btn_modificar"])[0];
 }
-print_r($lista);
 
 if (isset($_POST['btn_registro'])) {
     $usuario = new UsuarioModel();
@@ -64,7 +63,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="med_rut">Rut</label>  
                         <div class="col-md-4">
-                            <input id="med_rut" name="med_rut" type="text" value="<?php echo $lista->getMed_rut(); ?>" class="form-control input-md" required="">
+                            <input id="med_rut" name="med_rut" type="text" value="<?php echo $lista->getMed_rut(); ?>" class="form-control input-md" readonly="">
 
                         </div>
                     </div>

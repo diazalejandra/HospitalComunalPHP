@@ -14,17 +14,23 @@ if (isset($_POST["pac_rut"]) || isset($_POST["med_rut"])) {
         echo "<tr> ";
         echo "<th> ID </th> ";
         echo "<th> Fecha </th> ";
+        echo "<th> Horario </th> ";
+        echo "<th> Rut Paciente </th> ";
         echo "<th> Paciente </th> ";
-        echo "<th> Medico </th> ";
+        echo "<th> Rut Médico </th> ";
+        echo "<th> Médico </th> ";
         echo "<th> Estado </th> ";
         echo "</tr>";
         for ($i = 0; $i < count($lista); $i++) {
             echo "<tr> ";
             echo "<td> " . $lista[$i]->getCon_id() . "</td> ";
             echo "<td> " . $lista[$i]->getCon_fecha() . "</td> ";
+            echo "<td> " . $lista[$i]->getCon_horario_det() . "</td> ";
             echo "<td> " . $lista[$i]->getCon_paciente() . "</td> ";
+            echo "<td> " . $lista[$i]->getCon_paciente_det() . "</td> ";
             echo "<td> " . $lista[$i]->getCon_medico() . "</td> ";
-            echo "<td> " . $lista[$i]->getCon_estado() . "</td> ";
+            echo "<td> " . $lista[$i]->getCon_medico_det() . "</td> ";
+            echo "<td> " . $lista[$i]->getCon_estado_det() . "</td> ";
             echo "</tr>";
         }
         echo "</table>";
@@ -49,6 +55,7 @@ if (isset($_POST["pac_rut_mod"]) || isset($_POST["med_rut_mod"]) || isset($_POST
         echo "<tr> ";
         echo "<th> ID </th> ";
         echo "<th> Fecha </th> ";
+        echo "<th> Horario </th> ";
         echo "<th> Paciente </th> ";
         echo "<th> Medico </th> ";
         echo "<th> Estado </th> ";
@@ -58,9 +65,10 @@ if (isset($_POST["pac_rut_mod"]) || isset($_POST["med_rut_mod"]) || isset($_POST
             echo "<tr> ";
             echo "<td> " . $listar[$i]->getCon_id() . "</td> ";
             echo "<td> " . $listar[$i]->getCon_fecha() . "</td> ";
+            echo "<td> " . $listar[$i]->getCon_horario_det() . "</td> ";
             echo "<td> " . $listar[$i]->getCon_paciente() . "</td> ";
             echo "<td> " . $listar[$i]->getCon_medico() . "</td> ";
-            echo "<td> " . $listar[$i]->getCon_estado() . "</td> ";
+            echo "<td> " . $listar[$i]->getCon_estado_det() . "</td> ";
             echo "<td> <input type=\"button\" class=\"btn_eliminar\" value=\"Eliminar\" attr-id=\"" . $listar[$i]->getCon_id() . "\" /> "
             . "<button type=\"submit\" class=\"btn_modificar\" name=\"btn_modificar\" value=\"" . $listar[$i]->getCon_id() . "\">Modificar</button></td>";
             echo "</tr>";

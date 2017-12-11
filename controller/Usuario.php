@@ -67,7 +67,7 @@ class Usuario {
     public static function ver($usu_id) {
         try {
             $pdo = new ConexionDB();
-            $stmt = $pdo->prepare("SELECT usu_id, usu_nombre, usu_apellido, per.per_descripcion as usu_perfil, usu_password FROM usuario usu"
+            $stmt = $pdo->prepare("SELECT usu_id, usu_nombre, usu_apellido, usu_perfil, per.per_descripcion as usu_perfil_det, usu_password FROM usuario usu"
                     . " join perfil per on usu.usu_perfil = per.per_id WHERE usu_id = ?");
             $stmt->bindParam(1, $usu_id);
             $stmt->execute();
@@ -81,6 +81,7 @@ class Usuario {
                 $dto->setUsu_apellido($value["usu_apellido"]);
                 $dto->setUsu_perfil($value["usu_perfil"]);
                 $dto->setUsu_password($value["usu_password"]);
+                $dto->setUsu_perfil_det($value["usu_perfil_det"]);
                 $lista[] = $dto;
             }
         } catch (Exception $ex) {

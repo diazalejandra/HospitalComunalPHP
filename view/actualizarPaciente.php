@@ -99,7 +99,7 @@ if (isset($_POST['btn_registro'])) {
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="pac_sexo">Sexo</label>
                         <div class="col-md-4">
-                            <?php if($lista->getPac_rut() == 'F'){?>
+                            <?php if($lista->getPac_sexo() == 'F'){?>
                             <div class="radio">
                                 <label for="pac_sexo-0">
                                     <input type="radio" name="pac_sexo" id="pac_sexo-0" value="F" checked="checked">
