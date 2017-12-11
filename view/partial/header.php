@@ -28,6 +28,7 @@ if (isset($_SESSION['userlogin'])){
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <?php if($usuario->getUsu_perfil() == 'ADM'){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -36,32 +37,54 @@ if (isset($_SESSION['userlogin'])){
                         <li><a href="./modificarUsuario.php">Modificar</a></li>
                     </ul>
                 </li>
+                <?php } ?>
+                <?php if(!($usuario->getUsu_perfil() == 'PAC')){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Médicos<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <?php if($usuario->getUsu_perfil() == 'ADM'){ ?>
                         <li><a href="./agregarMedico.php">Agregar</a></li>
+                        <?php } ?>
                         <li><a href="./buscarMedico.php">Buscar</a></li>
+                        <?php if($usuario->getUsu_perfil() == 'ADM'){ ?>
                         <li><a href="./modificarMedico.php">Modificar</a></li>
+                        <?php } ?>
                     </ul>
                 </li>
+                <?php } ?>
+                <?php if(!($usuario->getUsu_perfil() == 'PAC')){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pacientes<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <?php if($usuario->getUsu_perfil() == 'ADM'){ ?>
                         <li><a href="./agregarPaciente.php">Agregar</a></li>
+                        <?php } ?>
                         <li><a href="./buscarPaciente.php">Buscar</a></li>
+                        <?php if($usuario->getUsu_perfil() == 'ADM'){ ?>
                         <li><a href="./modificarPaciente.php">Modificar</a></li>
+                        <?php } ?>
                     </ul>
                 </li>
+                <?php } ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Atenciones<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <?php if($usuario->getUsu_perfil() == 'SEC'){ ?>
                         <li><a href="./agregarAtencion.php">Agregar</a></li>
+                        <?php } ?>
+                        <?php if(!($usuario->getUsu_perfil() == 'PAC')){ ?>
                         <li><a href="./buscarAtencion.php">Buscar</a></li>
+                        <?php } ?>
+                        <?php if($usuario->getUsu_perfil() == 'PAC'){ ?>
+                        <li><a href="./listarAtencion.php">Buscar</a></li>
+                        <?php } ?>
+                        <?php if($usuario->getUsu_perfil() == 'SEC'){ ?>
                         <li><a href="./modificarAtencion.php">Modificar</a></li>
                         <li><a href="./modificarEstado.php">Actualizar Estado</a></li>
+                        <?php } ?>
                     </ul>
                 </li>
-                <?php if(!($usuario->getUsu_perfil() == 'SEC')){ ?>
+                <?php if($usuario->getUsu_perfil() == 'DIR'){ ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estadísticas<span class="caret"></span></a>
                     <ul class="dropdown-menu">
