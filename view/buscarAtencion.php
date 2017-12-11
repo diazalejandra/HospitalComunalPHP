@@ -42,7 +42,7 @@ include_once '/partial/session.php';
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Buscar Atencion</legend>
+                    <legend>Buscar Atención</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
